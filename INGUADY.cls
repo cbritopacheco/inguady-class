@@ -12,6 +12,9 @@
 % class like so:                                                            %
 % \documentclass{INGUADY}                                                   %
 %                                                                           %
+% Original Repo:                                                            %
+% https://github.com/carlosb/inguady-class                                  %
+%                                                                           %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 %                                                                           %
 %               Copyright 2018 Carlos Brito                                 %    
