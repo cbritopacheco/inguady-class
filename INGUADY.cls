@@ -49,9 +49,10 @@
 % End of identification
 
 % PRELIMINARY DECLARATIONS
-\LoadClass[twocolumn]{article}
+\LoadClass[onecolumn]{article}
 \RequirePackage{fancyhdr}
 \RequirePackage{geometry}
+\RequirePackage{multicol}
 % End of preliminary declarations
 
 % OPTIONS
@@ -86,11 +87,10 @@
 
 % Modify abstract
 \renewenvironment{abstract}[1][Abstract]
-{   
-    \begin{@twocolumnfalse}
+{
     \section*{#1}
 }
-{\end{@twocolumnfalse}}
+{}
 
 % Add keywords macro
 \newcommand{\keywords}[2][Keywords]{\vspace{5mm}\noindent\ignorespaces\textbf{#1:} #2}
@@ -145,11 +145,14 @@
     \end{center}
 }
 
+
 % Add a frontmatter environment
 \newenvironment{frontmatter} {
-    \onecolumn
     \thispagestyle{empty}
     \maketitle
-}{\twocolumn}
+}{}
+
+
+\newenvironment{body}{\begin{multicols}{2}}{\end{multicols}}
 
 % End of declarations

@@ -8,16 +8,21 @@
 \usepackage{amsmath}
 \usepackage{siunitx}
 \usepackage{booktabs}
+\usepackage{placeins}
 
 \begin{document}
 
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%                                           WRITE JOURNAL DETAILS HERE                                                                              %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+
 % The title of your article
-\title{Un modelo variacional nuevo para la clasificación binaria en el contexto de aprendizaje automático supervisado}
+\title{Un modelo nuevo variacional para la clasificación binaria en el contexto de aprendizaje automático supervisado}
 
 % The authors of your paper
 \author {
-	\correspauthor{C. D. Brito Pacheco} \orcidID{0000-0002-5913-2847},
-	C. F. Brito Loeza
+    \correspauthor{C. D. Brito Pacheco} \orcidID{0000-0002-5913-2847},
+    C. F. Brito Loeza
 }
 
 % The running head of your article
@@ -34,13 +39,13 @@
 Se examina el problema de aprendizaje supervisado en su planteación continua. Posteriormente se da una condición de optimalidad general a través de técnicas del análisis funcional y el cálculo de variaciones. Esto nos permite resolver la condición de optimalidad para la función deseada $u$ numéricamente y hacer varias comparaciones con otros modelos de aprendizaje supervisado ampliamente utilizados. Se emplea la precisión porcentual y el área bajo la curva característica operativa del receptor (AUC por sus siglas en inglés) como métricas del rendimiento. Finalmente, se realizan 3 análisis basados en estas dos métricas mencionadas donde comparamos los modelos y hacemos conclusiones para determinar si nuestro método es competitivo o no.
 
 % Spanish keywords
-\keywords[Palabras Clave]{aprendizaje variacional, aprendizaje automático, inteligencia artificial}
+\keywords[Palabras clave]{aprendizaje variacional, aprendizaje automático, inteligencia artificial}
 \end{abstract}
 
 % English title of your publication
 \englishtitle{A New Variational Model for Binary Classification in the Supervised Learning Context}
 
-% English abstract
+% The english abstract!
 \begin{abstract}[Abstract]
 We examine the supervised learning problem in its continuous setting and give a general optimality condition through techniques of functional analysis and the calculus of variations. This enables us to solve the optimality condition for the desired function $u$ numerically and make several comparisons with other widely utilized supervised learning models. We employ the accuracy and area under the receiver operating characteristic curve as metrics of the performance. Finally 3 analyses are conducted based on these two mentioned metrics where we compare the models and make conclusions to determine whether  or not our method is competitive. 
 
@@ -63,15 +68,16 @@ We examine the supervised learning problem in its continuous setting and give a 
 \end{frontmatter}
 % End of front matter
 
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
-% 											BEGIN WRITING YOUR PUBLICATION HERE													 %
-% 											IN PURE LATEX 																							 %
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%     BEGIN WRITING YOUR PUBLICATION HERE         %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
 
+\begin{body} % -  Start of the body - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
 \section{Introduction}
 The problem of \textit{supervised learning} arises in contexts where a study of a dependent variable Y is necessary in terms of an independent variable X. The goal of supervised learning is to predict the values of Y given many instances of the variable X. Generally, we call the instances of X and the values Y takes, the \textit{inputs} and \textit{outputs}. In the pattern recognition context we typically may read \textit{features} and \textit{responses} respectively as an alternative terminology. With this in mind, it is noteworthy that we are in fact assuming the existence of a  function between X and Y such that Y = f(X). That is, there exists a relationship between the two variables. In general, we say there are two main tasks in supervised learning: \textit{classification} and \textit{regression}. We make the distinction between these two contexts by defining classification as the \textit{task that classifies inputs into several classes} and regression as the \textit{task which estimates the functional relationship between two variables}. To summarize the supervised learning concerns itself with the estimation of a function $\hat{f}$ such that $Y \approx \hat{f}(X)$. Admittedly, the interpretation of supervised learning is to let a mathematical or computational model ``learn by example''.  The examples being the values X takes, while the learning process is the identification of patterns given by the relationship between X and Y. Chiefly,  supervised learning is catalogued as a form of \textit{artificial intelligence} \cite{goodfellow2016deep}.
-
 In recent years many supervised learning methods have been developed and many have been reviewed time and time again \cite{asingh, fernandezdel, kotsiantis, caruana}. One of the most recent reviews was conducted by Singh \textit{et al.} \cite{asingh}, which tests many different methods on a single dataset and presents the advantages and disadvantages in a textual manner and establishes their application areas. A slightly  older but extremely exhaustive analysis was conducted by Fernández-Delgado \textit{et al.} which evaluates 179 classifiers arising from 17 families on 121 datasets \cite{fernandezdel}. Support Vector Machines (SVB) and Random Forests are the top performing methods. Kotsiantis \textit{et al.} \cite{kotsiantis} have conducted a more comprehensive review of various different classification methods in which they show that SVM and Neural Networks (NN) were the best performing algorithms in terms of accuracy, classification speed and tolerance to parity problems. These algorithms, however, are lacking in terms of speed of learning, danger of overfitting and model parameter handling where Naïve Bayes and kNN are the top contenders. After analysing all of the results more carefully, one may argue that SVM clearly outperforms NN. This being said, one will find that NN and SVM are the most used supervised learning methods due to their simple ``black box'' functionality and so make good candidates to compare against. This work will not be concerned with such analyses but will instead propose a new supervised binary classification method. The method will be based in the resolution of a mathematical model through techniques from calculus of variations and functional analysis. Employment of these techniques allows us to exploit the underlying mathematical theory and properties from each of these fields. Even more, by utilizing these techniques we may obtain meaningful conditions in the continuous sense rather than performing optimization discretely. Comparing the performance of the model with SVM and NN we will determine if the new method is competitive or not.
+
+The structure of this work is as follows, the section ``A Variational Approach for Supervised Learning'' will consist in giving the formal problem statement. We will discuss some of the characteristics of this problem and will proceed to give a solution. Furthermore, we will present choices of loss and regularization functions to generate a new model from our solution. Next, we will present ``The Completed Model'' in the section by the same name and discuss its training method. Moving on, we evaluate the model and conduct analyses on the results in the sections ``Evaluation Methodology'' and ``Results and Analysis''. Lastly, we shall finalize this work in the section ``Conclusion''.
 
 \section{A Variational Approach for Supervised Learning}
 \subsection{The Problem}
@@ -82,15 +88,15 @@ The supervised learning problem may be characterized as follows. Given a trainin
 \end{equation*}
 we would like to find a function $u = u(\mathbf{x})$ defined by $u: \Omega \rightarrow \mathcal{Y}$. In order to find a suitable function $u$ it is necessary to suggest a suitable model which best describes the problem. The most widely used framework to solve the supervised learning problem is the minimization of the sum of a loss function $L(u, y)$ with an added regularization term $S(u)$:
 \begin{equation*}
-\min_u \lambda S(u) + \sum^N_{i=1} L(u(\mathbf{x}_i), y_i) \ .
+\min_u \lambda S(u) + \sum^N_{i=1} L(u(\mathbf{x}_i), y_i) .
 \end{equation*}
 For the continuous case, however, we have:
 \begin{equation} \label{eq:cont_problem}
-\min_u \lambda S(u) + \int_\Omega L(u(\mathbf{x}_i), y_i) \ .
+\min_u \lambda S(u) + \int_\Omega L(u(\mathbf{x}_i), y_i) .
 \end{equation}
 The idea behind the model is to ``punish'' incorrect predictions using the loss function while the regularizer term allows us to ``control'' or ``regulate'' the variable $u = u(\mathbf{x})$. A regularization term is typically used to solve ill-posed problems or prevent overfitting. Thus, the regularization term should only depend on the variable being regularized; in our case $u$. We may further specialize $S(u)$ to our needs. Opting to punish the complexity of $u$, we might attempt to  ``measure'' the complexity and subsequently punishing it. Thereupon we let $R(u) > 0$ be a Lebesgue integrable function which measures the complexity of $u$. The exact definition of $R$ is left until a later section. This being said, we substitute back into Equation \ref{eq:cont_problem} to obtain:
 \begin{equation} \label{eq:our_model}
-\min_u \int_\Omega \Big[  L(u, y) + \lambda R(u)  \Big] d\mathbf{x} \ .
+\min_u \int_\Omega \Big[  L(u, y) + \lambda R(u)  \Big] d\mathbf{x} .
 \end{equation}
 This last equation will be our main interest for the remainder of this work.
 
@@ -104,7 +110,7 @@ Thus, if we wanted to minimize the empirical risk, it would amount to solving th
 
 \begin{align} \label{eq:emp_risk}
 u^* &= \arg\min_{u \in \mathcal{H}} \mathbf{E} \big[  L(u, y)  \big]  \\
-&= \arg\min_{u \in \mathcal{H}} \int_\Omega L(u, y) d\mathbf{x} \ ,
+&= \arg\min_{u \in \mathcal{H}} \int_\Omega L(u, y) d\mathbf{x} ,
 \end{align}
 where $u^*$ is the \textit{minimizer} of the empirical risk.
 Therefore, it is finally clear that we will be minimizing the \textit{regularized empirical risk for a choice of $u$}. Although Equation \ref{eq:emp_risk} is usually minimized through probabilistic and statistical methods, we will employ concepts from functional analysis and calculus of variations to find a minimization condition. The condition may then be solved numerically to obtain $u^*$.
@@ -115,7 +121,6 @@ Akin to \textit{differential calculus}, we aim to ``differentiate'' the expressi
 \dfrac{\delta F}{\delta u(\mathbf{x})} = 0
 \end{equation*}
 we obtain the \textit{optimality condition}. Solving this condition numerically will give us the minimizer $u^*$ of the functional $F[u]$. Before deriving the optimality condition, it is necessary to make the definition of our model more precise. Let $f$ be a function of the form:
-
 \begin{align*}
 f(\mathbf{x}, &u(\mathbf{x}), \nabla u(\mathbf{x})) = \\
 &L(\mathbf{x}, u(\mathbf{x}))) + \lambda R(\mathbf{x}, u(\mathbf{x}), \nabla u(\mathbf{x})) \ ,
@@ -239,8 +244,6 @@ The parameter $\alpha$ was fixed to $\alpha = 0.001$.
 \section{Results and Analysis}
 This section presents the results in Tables \ref{tab:acc} through \ref{tab:grades}. To understand more easily the performance of the methods, we have arranged the results into various tables. In terms of accuracy,  LR outperformed SVM and NN on 3 datasets. In detail, LR outperformed NN on 4 datasets and outperformed SVM on 2, tying on the Breast Cancer dataset. To fully grasp how much better or worse our method has performed we calculated the absolute value of the residual between LR and the top performer for each dataset. On average we see that our method was down by $0.9567$ \%. Although not shown in Table \ref{tab:acc}, the average distance from the top performer for SVM is $0.5229$ \% and for NN it is $0.8975$ \%. These scores lend to the interpretation of ``which method got closer to the real solution''. Looking at who got the top score we might say that the top performer was the best \textit{method suited for that particular type of dataset}. It is of interest then to evaluate a method which in average should perform well for most types of datasets. Interpreting the results, we can confidently say that \textbf{SVM is the best method, while NN is second and LR comes a close third in terms of accuracy}.
 
-% Use \begin{table*} \center .... \end{table*}
-% To make the table go down the center
 \begin{table*}
 \center
 \caption{The accuracy (\%) of each method is outlined in this table. The second to last column indicates which ranking (1st, 2nd or 3rd) LR obtained; higher is better. On the other hand, the last column indicates the absolute value of the residual between LR and the 1st place. In bold, the best accuracy.} \vspace{3mm}
@@ -250,22 +253,23 @@ This section presents the results in Tables \ref{tab:acc} through \ref{tab:grade
 Data & Dim & $N$ & LR & SVM & NN & Place & Dist. from 1st \\
 \midrule
 \midrule
-Australian 				& 14 	& 690  	& 86.6667 					& 86.8116 						& \textbf{87.8261} 	& 3rd 					&  1.1594 \\
-Blood Transfusion 	& 4 		& 748 		& \textbf{78.2246} 	& 78.2237 						& 77.2859 					& 1st				 	& 0.0\\
-Breast Cancer 			& 30 	& 569 		& 97.7146 					& \textbf{98.7425} 		& 98.2673 					& 3rd 					& 1.0279\\
-Bupa 						& 6 		& 345 		& \textbf{72.4638} 	& \textbf{72.4638 }		& 71.0145 					& 1st 					& 0.0\\
-German 					& 24 	& 1000 	& 76.0000 					& 76.6000 						& \textbf{78.3000} 	& 3rd 					& 2.3 \\
-Haberman 				& 3 		& 306 		& 73.5431 					& 73.8710 						& \textbf{74.5267} 	& 3rd 					& 0.9836 \\
-Heart 						& 13 	& 270 		& 82.2222 					& \textbf{84.8741}			& 84.0148 					& 3rd 					& 2.6519 \\
-Sonar  						& 60 	& 208 		& 88.4321 					& \textbf{88.9199} 		& 87.4681 					& 2nd 					& 0.4878\\
-Vertebral Column 	& 6 		& 310 		& \textbf{86.7742} 	& 85.4839 						& 83.8710 					& 1st 					& 0.0 \\
+Australian              & 14    & 690   & 86.6667                   & 86.8116                       & \textbf{87.8261}  & 3rd                   &  1.1594 \\
+Blood Transfusion   & 4         & 748       & \textbf{78.2246}  & 78.2237                       & 77.2859                   & 1st                   & 0.0\\
+Breast Cancer           & 30    & 569       & 97.7146                   & \textbf{98.7425}      & 98.2673                   & 3rd                   & 1.0279\\
+Bupa                        & 6         & 345       & \textbf{72.4638}  & \textbf{72.4638 }     & 71.0145                   & 1st                   & 0.0\\
+German                  & 24    & 1000  & 76.0000                   & 76.6000                       & \textbf{78.3000}  & 3rd                   & 2.3 \\
+Haberman                & 3         & 306       & 73.5431                   & 73.8710                       & \textbf{74.5267}  & 3rd                   & 0.9836 \\
+Heart                       & 13    & 270       & 82.2222                   & \textbf{84.8741}          & 84.0148                   & 3rd                   & 2.6519 \\
+Sonar                       & 60    & 208       & 88.4321                   & \textbf{88.9199}      & 87.4681                   & 2nd                   & 0.4878\\
+Vertebral Column    & 6         & 310       & \textbf{86.7742}  & 85.4839                       & 83.8710                   & 1st                   & 0.0 \\
 \midrule
- & & & & \multicolumn{3}{r}{Average distance from 1st:} 		& 0.9567 \\
+ & & & & \multicolumn{3}{r}{Average distance from 1st:}         & 0.9567 \\
 \bottomrule
 \end{tabular}
 \label{tab:acc}
 \end{table*}
 
+The AUC score may also be used to further determine the performance of a classifier \cite{fawcett}. Proceeding in a similar manner as before, we calculate the average residual between the 1st place and LR. We find that LR is on average down from $0.0126$ units from the top performer for each dataset. The same is calculated for SVM and NN; respectively $0.0088$ and $0.0161$. Surprisingly, even though NN outperformed SVM and LR on 4 different datasets while LR only outperformed the others on one, \textbf{on average LR will perform better than NN.} Unsurprisingly, SVM will still perform better than NN and LR. 
 
 \begin{table*}
 \center
@@ -276,23 +280,21 @@ Vertebral Column 	& 6 		& 310 		& \textbf{86.7742} 	& 85.4839 						& 83.8710 		
 Data & LR & SVM & NN & Place & Dist. from 1st \\
 \midrule
 \midrule
-Australian 					& 0.8643  (B)				& 0.8701(B)					& \textbf{0.8777} (B)		& 3rd 					& 0.0134\\
-Blood Transfusion 		& 0.5844  (F)				& \textbf{0.6144} (D)		& 0.5502	 (F)					& 2nd				 	& 0.03 \\
-Breast Cancer 				& 0.9729  (A)				& 0.9800 (A)					& \textbf{0.9858} (A) 	& 3rd 					& 0.0129 \\
-Bupa 							& 0.7024  (C)				& \textbf{0.7059} (C)		& 0.6866	(D)					& 2nd				 	& 0.0035 \\
-German 						& 0.6821	  (D)				& 0.6920	(D)					& \textbf{0.7058} (C)		& 3rd 					& 0.0237 \\
-Haberman 					& \textbf{0.5560} (F)	& 0.5559 (F)					& 0.5463 (F)					& 1st 					& 0.0 \\
-Heart 							& 0.8180  (B)				& 0.8452	(B)					& \textbf{0.8322} (B)		& 3rd 					& 0.0142 \\
-Sonar  							& 0.8857  (B)				& \textbf{0.8906} (B)		& 0.8812 (B)					& 2nd 					& 0.0049 \\
-Vertebral Column 		& 0.8292  (B)				& \textbf{0.8404} (B)		& 0.7978	 (C)					& 2nd 					& 0.0112 \\
+Australian                  & 0.8643  (B)               & 0.8701(B)                 & \textbf{0.8777} (B)       & 3rd                   & 0.0134\\
+Blood Transfusion       & 0.5844  (F)               & \textbf{0.6144} (D)       & 0.5502     (F)                    & 2nd                   & 0.03 \\
+Breast Cancer               & 0.9729  (A)               & 0.9800 (A)                    & \textbf{0.9858} (A)   & 3rd                   & 0.0129 \\
+Bupa                            & 0.7024  (C)               & \textbf{0.7059} (C)       & 0.6866    (D)                 & 2nd                   & 0.0035 \\
+German                      & 0.6821      (D)               & 0.6920    (D)                 & \textbf{0.7058} (C)       & 3rd                   & 0.0237 \\
+Haberman                    & \textbf{0.5560} (F)   & 0.5559 (F)                    & 0.5463 (F)                    & 1st                   & 0.0 \\
+Heart                           & 0.8180  (B)               & 0.8452    (B)                 & \textbf{0.8322} (B)       & 3rd                   & 0.0142 \\
+Sonar                           & 0.8857  (B)               & \textbf{0.8906} (B)       & 0.8812 (B)                    & 2nd                   & 0.0049 \\
+Vertebral Column        & 0.8292  (B)               & \textbf{0.8404} (B)       & 0.7978     (C)                    & 2nd                   & 0.0112 \\
 \midrule
 & & & \multicolumn{2}{r}{Average distance from 1st: } & 0.0126 \\
 \bottomrule
 \end{tabular}
 \label{tab:roc}
 \end{table*}
-The AUC score may also be used to further determine the performance of a classifier \cite{fawcett}. Proceeding in a similar manner as before, we calculate the average residual between the 1st place and LR. We find that LR is on average down from $0.0126$ units from the top performer for each dataset. The same is calculated for SVM and NN; respectively $0.0088$ and $0.0161$. Surprisingly, even though NN outperformed SVM and LR on 4 different datasets while LR only outperformed the others on one, \textbf{on average LR will perform better than NN.} Unsurprisingly, SVM will still perform better than NN and LR. 
-
 Even though our analysis has been very exact until now, it is time to present a more intuitive analysis based on the AUC. Furthermore, this analysis is more \textit{robust} than the previous. The analysis consists in assigning a ``grade'' to a classifier by specifying the following grading scheme:
 \[
 \text{Grade} = 
@@ -326,19 +328,21 @@ Weighted grade (lower is better): & 26 & \textbf{25} & 29\\
 \end{tabular}
 \label{tab:grades}
 \end{table*}
-
 \section{Conclusion}
 Even though supervised learning has had tremendous advances in the last few years, it remains clear that a lot of work has yet to be done. 
-As part of our contribution to the field, we have designed and implemented a new variational model for binary classification. Opting to attack the supervised learning problem by functional and variational means, we arrived at the LR model and gave each of its components interpretations. 
-After conducting three different analyses, we obtained three different benchmarks that permitted us to determine how well our method compares with the most utilized methods; NN and SVM. 
-The results obtained for SVM clearly indicated that it was the superior method amongst the three, the focus quickly shifted to the comparison between NN and LR. It was soon found that LR outperformed NN in two, out of three, benchmarks. Without a doubt, this variational approach looks to be very promising and must be explored further in future work.
+As part of our contribution to the field, we have designed and implemented a new variational model for binary classification. Opting to attack the supervised learning problem by functional and variational means, we arrived at the LR model and gave each of its components interpretations. Moreover we used the Levenberg-Marquardt method to solve the optimality condition which in essence was equivalent to ``training the model''. We outlined our evaluation  criteria and methodology so that we could compare how well our method stood against two of the most utilized methods; NN and SVM.  From the results obtained, we conducted three different analyses to quantify the performance of each model. The accuracy results obtained, clearly indicated that SVM was the superior method amongst the three, and so the focus shifted to the comparison between NN and LR. It was found that NN outperformed LR by a small margin. The second analysis showed that LR outperformed NN while SVM came out on top once again. Finally, we conducted a more robust analysis which permitted us to ignore small variations in the scores. This last analysis further showed that LR clearly outperformed NN. Moreover it showed that LR was not far from SVM's performance. We speculate that this is due to the heavy optimizations in the implementation of SVM which permit it to find the minimum in a faster manner.
+
+Without a doubt, the variational approach looks to be very promising and is to be explored in future work. Namely, we will concentrate in deriving expressions for higher order derivatives and better formalizing the problem at hand in order to derive more interesting properties.
 The implementations for the LR model, benchmarking scripts and datasets may all be found at \texttt{https://github.com/carlosb/thesis}.
 
-% Needed for converting the bibliography back to one colum
-\onecolumn 
+\end{body} % - - - - - - - - - - - - - - - - - - - -  End of the body - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
 
-% The bibliography
-\begin{thebibliography}{5}
+\pagebreak
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+%                                           WRITE BIBLIOGRAPHY HERE                                                                                    %
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - %
+\begin{thebibliography}{5} 
 
 % The text between curly brackets is the citation tag
 % Use this when citing a source e.g. \cite{goodfellow2016deep}
